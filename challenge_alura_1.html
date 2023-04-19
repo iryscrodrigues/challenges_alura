@@ -1,0 +1,100 @@
+<meta charset="UTF-8">
+
+<script>
+
+    function pulaLinha() {
+
+        document.write("<br>");
+}
+
+    function mostra(frase) {
+
+        document.write(frase);
+        pulaLinha();
+}
+
+	mostra ("<h1>Que tal jogarmos um jogo em que você precisa acertar um número entre 0 e 100? Vamos lá?</h1>");
+
+</script>
+
+<input/>
+
+<button>Se você tem certeza, clique aqui!</button>
+
+<script>
+
+    function sorteia() {
+
+       return Math.round(Math.random() * 100);
+
+    }
+    function sorteiaNumeros(quantidade) {
+
+        var segredos = [];
+
+        var numero = 1;
+
+        while(numero <= quantidade) {
+
+              var numeroAleatorio = sorteia();
+              var achou = false;
+
+              if (numeroAleatorio !== 0) {
+                     for(var posicao = 0; posicao < segredos.length; posicao++) {
+
+                           if(segredos[posicao] == numeroAleatorio){
+                                achou = true;
+                                break;
+                           }
+                    }
+
+                     if (achou == false) {
+                           segredos.push(numeroAleatorio);
+                           numero++;
+                     }
+              }
+
+        }
+
+        return segredos;
+
+    }
+
+    var segredos = sorteiaNumeros(1);
+
+    console.log(segredos);
+
+    var input = document.querySelector("input");
+    input.focus();
+
+    function verifica() {
+
+       var achou = false;
+
+       for(var posicao = 0; posicao < segredos.length; posicao++) {
+
+              if(input.value == segredos[posicao]) {
+
+                     alert("Incrível! Você acertou, eu pensei no " + segredos);
+                     achou = true;
+                     break;
+              } 
+       }
+
+       if(achou == false) {
+
+              alert("Não foi dessa vez! Eu tinha pensado no " + segredos);
+       }
+
+       input.value = "";
+       input.focus();
+
+    }
+
+
+    var button = document.querySelector("button");
+
+    button.onclick = verifica;
+
+</script>
+
